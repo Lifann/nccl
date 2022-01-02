@@ -274,6 +274,24 @@ __device__ void NCCL_FUNC_NAME(func, algo, proto, devredop, type)() { \
   #else
     #define IMPL_COLL_R(func) // skip SumPostDiv for floating point
   #endif
+#elif NCCL_OP == 6
+  #if NCCL_TYPE < 6
+    #define IMPL_COLL_R(func) IMPL_COLL2(func, BitAnd)
+  #else
+    #define IMPL_COLL_R(func) // skip BitAnd for floating point
+  #endif
+#elif NCCL_OP == 7
+  #if NCCL_TYPE < 6
+    #define IMPL_COLL_R(func) IMPL_COLL2(func, BitOr)
+  #else
+    #define IMPL_COLL_R(func) // skip BitOr for floating point
+  #endif
+#elif NCCL_OP == 8
+  #if NCCL_TYPE < 6
+    #define IMPL_COLL_R(func) IMPL_COLL2(func, BitXor)
+  #else
+    #define IMPL_COLL_R(func) // skip BitXor for floating point
+  #endif
 #endif
 
 #if NCCL_OP == 0 && NCCL_TYPE == 0

@@ -78,14 +78,20 @@
   NCCL_FUNCS3A(func, Sum), /*Max*/ \
   NCCL_FUNCS3A(func, Sum), /*Min*/ \
   NCCL_FUNCS3A(func, Sum), /*PreMulSum*/ \
-  NCCL_FUNCS3A(func, Sum)  /*SumPostDiv*/
+  NCCL_FUNCS3A(func, Sum), /*SumPostDiv*/ \
+  NCCL_FUNCS3A(func, Sum), /*BitAnd*/ \
+  NCCL_FUNCS3A(func, Sum), /*BitOr*/ \
+  NCCL_FUNCS3A(func, Sum)  /*BitXor*/
 #define NCCL_FUNCS2B(func) \
   NCCL_FUNCS3B(func, Sum), /*Sum*/ \
   NCCL_FUNCS3B(func, Sum), /*Prod*/ \
   NCCL_FUNCS3B(func, Sum), /*Max*/ \
   NCCL_FUNCS3B(func, Sum), /*Min*/ \
   NCCL_FUNCS3B(func, Sum), /*PreMulSum*/ \
-  NCCL_FUNCS3B(func, Sum)  /*SumPostDiv*/
+  NCCL_FUNCS3B(func, Sum), /*SumPostDiv*/ \
+  NCCL_FUNCS3B(func, Sum), /*BitAnd*/ \
+  NCCL_FUNCS3B(func, Sum), /*BitOr*/ \
+  NCCL_FUNCS3B(func, Sum)  /*BitXor*/
 
 // Must be consistent with the ncclFuncSet enum
 static void* const ncclKerns[1+ncclNumTypes+NCCL_NUM_FUNCTIONS*ncclNumDevRedOps*ncclNumTypes*NCCL_NUM_ALGORITHMS*NCCL_NUM_PROTOCOLS] = {
@@ -1196,6 +1202,9 @@ static ncclResult_t hostToDevRedOp(
     opFull->scalarArgIsPtr = false;
     opFull->scalarArg = u64;
     break;
+  case ncclBitAnd:  opFull->op = ncclDevBitAnd;  break;
+  case ncclBitOr:  opFull->op = ncclDevBitOr;  break;
+  case ncclBitXor:  opFull->op = ncclDevBitXor;  break;
   default: // user created
     int ix = int(ncclUserRedOpMangle(comm, op)) - int(ncclNumOps);
     ncclUserRedOp *user = &comm->userRedOps[ix];

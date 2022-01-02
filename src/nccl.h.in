@@ -108,10 +108,13 @@ typedef enum { ncclSum        = 0,
                ncclMax        = 2,
                ncclMin        = 3,
                ncclAvg        = 4,
+               ncclBitAnd     = 5,
+               ncclBitOr      = 6,
+               ncclBitXor     = 7,
                /* ncclNumOps: The number of built-in ncclRedOp_t values. Also
                 * serves as the least possible value for dynamic ncclRedOp_t's
                 * as constructed by ncclRedOpCreate*** functions. */
-               ncclNumOps     = 5,
+               ncclNumOps     = 8,
                /* ncclMaxRedOp: The largest valid value for ncclRedOp_t.
                 * It is defined to be the largest signed value (since compilers
                 * are permitted to use signed enums) that won't grow

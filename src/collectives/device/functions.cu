@@ -75,9 +75,15 @@ __shared__ ncclShmemData ncclShmem;
   NCCL_FUNCS3A(func, Max,        /*nullForFloat=*/0), \
   NCCL_FUNCS3A(func, Min,        /*nullForFloat=*/0), \
   NCCL_FUNCS3A(func, PreMulSum,  /*nullForFloat=*/0), \
-  NCCL_FUNCS3A(func, SumPostDiv, /*nullForFloat=*/1)
+  NCCL_FUNCS3A(func, SumPostDiv, /*nullForFloat=*/1), \
+  NCCL_FUNCS3A(func, BitAnd,     /*nullForFloat=*/1), \
+  NCCL_FUNCS3A(func, BitOr,      /*nullForFloat=*/1), \
+  NCCL_FUNCS3A(func, BitXor,     /*nullForFloat=*/1)
 
 #define NCCL_FUNCS2B(func) \
+  NCCL_FUNCS3B(func, Sum), \
+  NCCL_FUNCS3B(func, Sum), \
+  NCCL_FUNCS3B(func, Sum), \
   NCCL_FUNCS3B(func, Sum), \
   NCCL_FUNCS3B(func, Sum), \
   NCCL_FUNCS3B(func, Sum), \

@@ -63,6 +63,30 @@ struct FuncTraits { // generic implementation for FuncSum,Prod,Min,Max
   __device__ static T postOp(Fn, T x) { return x; }
 };
 
+template<typename T>
+struct FuncBitAnd {
+  __device__ FuncBitAnd(uint64_t opArg=0) {}
+  __device__ T operator()(const T x, const T y) const {
+    return x & y;
+  }
+};
+
+template<typename T>
+struct FuncBitOr {
+  __device__ FuncBitOr(uint64_t opArg=0) {}
+  __device__ T operator()(const T x, const T y) const {
+    return x | y;
+  }
+};
+
+template<typename T>
+struct FuncBitXor {
+  __device__ FuncBitXor(uint64_t opArg=0) {}
+  __device__ T operator()(const T x, const T y) const {
+    return x ^ y;
+  }
+};
+
 #define MASK0 0x00ff00ff
 #define MASK1 0xff00ff00
 static __device__ uint32_t addChar4(const uint32_t x, const uint32_t y) {

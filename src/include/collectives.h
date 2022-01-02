@@ -9,7 +9,8 @@
 
 enum ncclDevRedOp_t {
   ncclDevSum, ncclDevProd, ncclDevMax, ncclDevMin,
-  ncclDevPreMulSum, ncclDevSumPostDiv,
+  ncclDevPreMulSum, ncclDevSumPostDiv, ncclDevBitAnd,
+  ncclDevBitOr, ncclDevBitXor,
   ncclNumDevRedOps
 };
 struct ncclDevRedOpFull {
@@ -84,7 +85,10 @@ struct ncclDevRedOpFull {
   DECL2(func, Min, /*undefForFloat=*/0) \
   DECL2(func, Max, /*undefForFloat=*/0) \
   DECL2(func, PreMulSum, /*undefForFloat=*/0) \
-  DECL2(func, SumPostDiv, /*undefForFloat=*/1)
+  DECL2(func, SumPostDiv, /*undefForFloat=*/1) \
+  DECL2(func, BitAnd, /*undefForFloat=*/1) \
+  DECL2(func, BitOr, /*undefForFloat=*/1) \
+  DECL2(func, BitXor, /*undefForFloat=*/1)
 
 DECL2(Broadcast, Sum, /*undefForFloat=*/0)
 DECL(Reduce)
